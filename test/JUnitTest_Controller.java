@@ -1,6 +1,4 @@
-﻿package control;  //Change this
-
-import interfaces.WordPairControlInterface;
+import FlowSolid.WordPairControlInterface;
 import java.util.UUID;
 import org.junit.After;
 import org.junit.Before;
@@ -11,7 +9,7 @@ import static org.junit.Assert.*;
  *
  * Unit test for the WordPairDemo interface
  */
-public class JUnitTest_Controller.java
+public class JUnitTest_Controller
 {
     // <editor-fold defaultstate="collapsed" desc="Utility methods for this test fixture ">
 
@@ -33,7 +31,7 @@ public class JUnitTest_Controller.java
 
     WordPairControlInterface wordPairDemo;
 
-    public JUnitTest_Controller.java()
+    public JUnitTest_Controller()
     {
     }
 
