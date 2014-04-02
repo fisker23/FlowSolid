@@ -12,6 +12,10 @@ package flowsolid;
  */
 public class GUI extends javax.swing.JFrame {
 
+    String question;
+    String answer;
+    WordPair WP = new WordPair(question,answer);
+    Control con = new Control();
     /**
      * Creates new form GUI
      */
@@ -42,7 +46,6 @@ public class GUI extends javax.swing.JFrame {
 
         jLabelQuestion.setText("Question");
 
-        jTextFieldQuestion.setText("jTextField1");
         jTextFieldQuestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldQuestionActionPerformed(evt);
@@ -51,7 +54,6 @@ public class GUI extends javax.swing.JFrame {
 
         jLabelAnswer.setText("Answer");
 
-        jTextFieldAnswer.setText("jTextField2");
         jTextFieldAnswer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldAnswerActionPerformed(evt);
@@ -144,10 +146,17 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         // TODO add your handling code here:
+        con.getRandomQuestion();
+        question = WP.getQuestion();
+        answer = WP.getAnswer();
+        jTextFieldQuestion.setText(question);
+        
     }//GEN-LAST:event_jButtonNextActionPerformed
 
     private void jButtonGuessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuessActionPerformed
         // TODO add your handling code here:
+        con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText());
+        
     }//GEN-LAST:event_jButtonGuessActionPerformed
 
     private void jButtonLookUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLookUpActionPerformed
