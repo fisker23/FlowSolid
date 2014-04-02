@@ -2,6 +2,24 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group name="Javas"/>
+=======
+<<<<<<< HEAD
+        <group>
+            <file>file:/C:/Users/Fisker/Documents/NetBeansProjects/FlowSolid/FlowSolid/src/flowsolid/WordPairControlInterface.java</file>
+            <file>file:/C:/Users/Fisker/Documents/NetBeansProjects/FlowSolid/FlowSolid/src/flowsolid/GUI.java</file>
+            <file>file:/C:/Users/Fisker/Documents/NetBeansProjects/FlowSolid/FlowSolid/src/flowsolid/JUnitTest_Controller.java</file>
+=======
+        <group name="Javas">
+            <file>file:/C:/Users/Computer/Dropbox/KNord/1.%20Semester/Javas/FlowSolid/src/flowsolid/FlowSolid.java</file>
+            <file>file:/C:/Users/Computer/Dropbox/KNord/1.%20Semester/Javas/FlowSolid/src/flowsolid/GUI.java</file>
+            <file>file:/C:/Users/Computer/Dropbox/KNord/1.%20Semester/Javas/FlowSolid/src/flowsolid/WordPair.java</file>
+            <file>file:/C:/Users/Computer/Dropbox/KNord/1.%20Semester/Javas/FlowSolid/src/flowsolid/WordPairControlInterface.java</file>
+            <file>file:/C:/Users/Computer/Dropbox/KNord/1.%20Semester/Javas/FlowSolid/test/JUnitTest_Controller.java</file>
+            <file>file:/C:/Users/Computer/Dropbox/KNord/1.%20Semester/Javas/FlowSolid/src/flowsolid/Control.java</file>
+>>>>>>> 89c6e9862e97ae275f963dadd27da48ebea8fe6a
+        </group>
+>>>>>>> a6203f3731960275051304fa712c76c44e081bb8
     </open-files>
 </project-private>
