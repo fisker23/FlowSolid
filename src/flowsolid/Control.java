@@ -1,35 +1,50 @@
-package FlowSolid;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package flowsolid;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
- * @author CHU
+ * @author Computer
  */
-
-public interface WordPairControlInterface
-{
-    
+public class Control implements WordPairControlInterface{
+    private ArrayList<WordPair> WordPairList = new ArrayList<WordPair>();   
 /**
      * Pre: Post: A new word pair is added to the existing collection of word
      * pairs. This method does not save to file!
      */
-    void add(String question, String answer);
+    void add(String question, String answer){
+        WordPairList.add(new WordPair(question, answer));
+    };
 
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
      */
-    int size();
+    int size(){
+        return WordPairList.size();
+    }
 
     /**
      * Pre: At least one word pair must be present Post: Returns a question
      * randomly selected from the collection of word pairs.
      */
-    String getRandomQuestion();
+    String getRandomQuestion(){
+        return WordPairList.get(new Random().nextInt(size())-1).getQuestion();
+    }
 
     /**
      * Pre: Post: Returns true if (question, quess) exists as a word pair in the
      * collection, otherwise false.
      */
-    boolean checkGuess(String question, String quess);
+    boolean checkGuess(String question, String quess){
+        
+    }
 
     /**
      * Pre: Post: Returns the answer corresponding to the question if this
@@ -56,3 +71,5 @@ public interface WordPairControlInterface
     void clear();
 }
 
+
+}
