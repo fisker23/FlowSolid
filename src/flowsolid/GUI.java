@@ -6,20 +6,28 @@
 
 package flowsolid;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Andreas Fisker
  */
 public class GUI extends javax.swing.JFrame {
 
-    String question;
-    String answer;
-    Control con = new Control();
+    private Control con;
+    private final int startSize; //Antal af ordpar ved starten
     /**
      * Creates new form GUI
      */
     public GUI() {
+        con = new Control();
+        con.load("WordList.txt");
+        startSize = con.size();
         initComponents();
+        jTextFieldQuestion.setEditable(false);
+        jLabelFeedback.setText("");
+        setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
 
     /**
@@ -42,6 +50,11 @@ public class GUI extends javax.swing.JFrame {
         jLabelFeedback = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabelQuestion.setText("Question");
 
@@ -67,6 +80,7 @@ public class GUI extends javax.swing.JFrame {
         });
 
         jButtonGuess.setText("Guess");
+        jButtonGuess.setPreferredSize(new java.awt.Dimension(61, 31));
         jButtonGuess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonGuessActionPerformed(evt);
@@ -94,48 +108,53 @@ public class GUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelFeedback, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(262, 262, 262))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelQuestion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextFieldQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabelFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(134, 134, 134))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabelAnswer)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextFieldAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButtonNew))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextFieldQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabelQuestion)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonNew, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButtonNext, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonGuess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonLookUp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(96, 96, 96))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonLookUp, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonGuess, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addContainerGap(109, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelQuestion)
-                    .addComponent(jButtonNext))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabelAnswer)
+                    .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelAnswer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButtonGuess)))
-                .addGap(26, 26, 26)
+                        .addComponent(jLabelQuestion))
+                    .addComponent(jButtonGuess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonLookUp)
-                    .addComponent(jButtonNew))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                    .addComponent(jButtonNew, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonLookUp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jLabelFeedback)
                 .addGap(72, 72, 72))
         );
@@ -145,15 +164,21 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         // TODO add your handling code here:
-        con.getRandomQuestion();
-        jTextFieldQuestion.setText(question);
+        if(con.getRandomQuestion() == null){
+            jLabelFeedback.setText("Congratz! You have answered all questions!");
+            jTextFieldQuestion.setText("");
+        }
+        else{
+        jTextFieldQuestion.setText(con.getRandomQuestion());
+        }
+        jTextFieldAnswer.setText("");
         
     }//GEN-LAST:event_jButtonNextActionPerformed
 
     private void jButtonGuessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuessActionPerformed
         // TODO add your handling code here:
         if(
-        con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText()) == true){
+        con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText())){
             jLabelFeedback.setText("Korrekt");
         }
         else{
@@ -164,11 +189,35 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonLookUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLookUpActionPerformed
         // TODO add your handling code here:
-        con.lookup(jTextFieldQuestion.getText());
+        jTextFieldAnswer.setText(con.lookup(jTextFieldQuestion.getText()));
     }//GEN-LAST:event_jButtonLookUpActionPerformed
 
     private void jButtonNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNewActionPerformed
-        // TODO add your handling code here:
+        if(jButtonNew.getText().equals("New")){
+            jButtonNew.setText("Save");
+            jButtonGuess.setVisible(false);
+            jButtonLookUp.setVisible(false);
+            jButtonNext.setVisible(false);
+            jTextFieldQuestion.setEditable(true);
+            jTextFieldQuestion.setText("");
+            jTextFieldAnswer.setText("");
+        }
+        else if(jButtonNew.getText().equals("Save")){
+            if(jTextFieldAnswer.getText().equals("") || jTextFieldQuestion.getText().equals("")){
+            jLabelFeedback.setText("New Question Not Added!");
+            }
+            else{
+            con.add(jTextFieldQuestion.getText(), jTextFieldAnswer.getText());
+            jLabelFeedback.setText("New Question Added!");
+            }
+            jButtonNew.setText("New");
+            jButtonGuess.setVisible(true);
+            jButtonLookUp.setVisible(true);
+            jButtonNext.setVisible(true);
+            jTextFieldQuestion.setEditable(false);
+            jTextFieldQuestion.setText("");
+            jTextFieldAnswer.setText("");
+        }
     }//GEN-LAST:event_jButtonNewActionPerformed
 
     private void jTextFieldAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldAnswerActionPerformed
@@ -178,6 +227,15 @@ public class GUI extends javax.swing.JFrame {
     private void jTextFieldQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldQuestionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldQuestionActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(con.size() > startSize){ //Tjekker om der er tilføjet nye ord.
+        int Save = JOptionPane.showConfirmDialog(null, "Save before Exit?");
+        if(Save == 0) con.save("WordList.txt");
+        if(Save == 0 || Save == 1) dispose();
+        }
+        else dispose(); //Lukker uden at spørge om save, hvis der ikk er tilføjet nye ord.
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

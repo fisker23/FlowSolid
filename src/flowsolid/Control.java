@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package flowsolid;
 
 import java.io.File;
@@ -15,7 +9,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author Computer
+ * @author Bobbie Apitzsch og Andreas Fisker
  */
 public class Control implements WordPairControlInterface{
     private HashMap<String, String> wordPairList = new HashMap<>();
@@ -29,19 +23,18 @@ public class Control implements WordPairControlInterface{
         wordPairList.put(question, answer);
         unAnsweredQuestionList.add(question);
     }
-
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
      */
     int size(){
         return wordPairList.size();
     }
-
     /**
      * Pre: At least one word pair must be present Post: Returns a question
      * randomly selected from the collection of word pairs.
      */
     String getRandomQuestion(){
+        if(unAnsweredQuestionList.isEmpty()) return null;
         return unAnsweredQuestionList.get(generator.nextInt(unAnsweredQuestionList.size()));
     }
 
@@ -64,7 +57,7 @@ public class Control implements WordPairControlInterface{
     String lookup(String question){
         return wordPairList.get(question);
     }
-
+    
     /**
      * Pre: Post: Word pairs are read from the file "filename" and added to the
      * collection of word pairs. Returns true if successfully done. Otherwise it
@@ -99,14 +92,13 @@ public class Control implements WordPairControlInterface{
             return false;
         }
         
-        for(String key : wordPairList.keySet()){
-            pw.println(key + "," + wordPairList.get(key));
+        for(String question : wordPairList.keySet()){
+            pw.println(question + "," + wordPairList.get(question));
         }        
         pw.close();
         return true;
     
     }
-
     /**
      * Pre: Post: The existing collection of word pairs is cleared
      */
