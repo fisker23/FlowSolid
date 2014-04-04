@@ -27,7 +27,6 @@ public class GUI extends javax.swing.JFrame {
         con.load("WordList.txt");
         startSize = con.size();
         initComponents();
-        jTextFieldQuestion.setEditable(false);
         jLabelFeedback.setText("");
         setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
     }
@@ -213,7 +212,6 @@ public class GUI extends javax.swing.JFrame {
             jButtonGuess.setVisible(false);
             jButtonLookUp.setVisible(false);
             jButtonNext.setVisible(false);
-            jTextFieldQuestion.setEditable(true);
             jTextFieldQuestion.setText("");
             jTextFieldAnswer.setText("");
         }
@@ -223,13 +221,13 @@ public class GUI extends javax.swing.JFrame {
             }
             else{
             con.add(jTextFieldQuestion.getText(), jTextFieldAnswer.getText());
+            con.addLevel(jTextFieldQuestion.getText(), 1);
             jLabelFeedback.setText("New Question Added!");
             }
             jButtonNew.setText("New");
             jButtonGuess.setVisible(true);
             jButtonLookUp.setVisible(true);
             jButtonNext.setVisible(true);
-            jTextFieldQuestion.setEditable(false);
             jTextFieldQuestion.setText("");
             jTextFieldAnswer.setText("");
         }

@@ -12,6 +12,7 @@ import java.util.Scanner;
  */
 public class Control implements WordPairControlInterface{
     private HashMap<String, String> wordPairList = new HashMap<>();
+    private HashMap<String, Integer> levelList = new HashMap<>();
     private Random generator = new Random();
 /**
      * Pre: Post: A new word pair is added to the existing collection of word
@@ -20,6 +21,11 @@ public class Control implements WordPairControlInterface{
     public void add(String question, String answer){
         wordPairList.put(question, answer);
     }
+    
+    public void addLevel(String question, int level){
+        levelList.put(question, level);
+    }
+    
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
      */
@@ -33,6 +39,14 @@ public class Control implements WordPairControlInterface{
     public String getRandomQuestion(){
         Object[] questions = wordPairList.keySet().toArray();
         return (String) questions[generator.nextInt(questions.length)];
+    }
+    
+    public int getLevel(String question){
+        return levelList.get(question);
+    }
+    
+    public void updateLevel(String question, int level){
+        levelList.put(question, level);
     }
 
     /**
@@ -64,7 +78,8 @@ public class Control implements WordPairControlInterface{
             while (scan.hasNext()){
                 String str = scan.nextLine();
                 String[] parts = str.split(",");
-                add(parts[0], parts[1]);                   
+                add(parts[0], parts[1]);
+                addLevel(parts[0], Integer.parseInt(parts[2]));
             }
         scan.close();
         return true;
@@ -87,7 +102,7 @@ public class Control implements WordPairControlInterface{
         }
         
         for(String question : wordPairList.keySet()){
-            pw.println(question + "," + wordPairList.get(question));
+            pw.println(question + "," + wordPairList.get(question) + "," + levelList.get(question));
         }        
         pw.close();
         return true;
