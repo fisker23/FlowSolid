@@ -166,7 +166,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         // TODO add your handling code here:
-        if(AnsweredQuestionList.size() != startSize){
+        if(AnsweredQuestionList.size() != con.size()){
         String question = con.getRandomQuestion();
             if (AnsweredQuestionList.contains(question)){
                 jButtonNextActionPerformed(evt);
@@ -217,7 +217,6 @@ public class GUI extends javax.swing.JFrame {
             else{
             con.add(jTextFieldQuestion.getText(), jTextFieldAnswer.getText());
             jLabelFeedback.setText("New Question Added!");
-            startSize += 1;
             }
             jButtonNew.setText("New");
             jButtonGuess.setVisible(true);
