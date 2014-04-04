@@ -1,3 +1,4 @@
+cake,kage
 bus,bus
 hest,horse
 bil,car
