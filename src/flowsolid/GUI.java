@@ -166,6 +166,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         // TODO add your handling code here:
+        jLabelFeedback.setText("");
         if(AnsweredQuestionList.size() != con.size()){
         String question = con.getRandomQuestion();
             if (AnsweredQuestionList.contains(question)){
