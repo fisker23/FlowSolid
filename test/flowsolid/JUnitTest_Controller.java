@@ -1,4 +1,5 @@
-import FlowSolid.WordPairControlInterface;
+package flowsolid;
+
 import java.util.UUID;
 import org.junit.After;
 import org.junit.Before;
@@ -45,7 +46,7 @@ public class JUnitTest_Controller
     public void setUp()
     {
         //REPLACE WordPairDemoV1    WITH YOUR OWN CLASS THAT IMPLEMENTS THE INTERFACE
-        wordPairDemo = new REPLACE_ME_WITH_YOUR_OWN_CONTROLLER(); // !!!!! REPLACE HERE !!!!!
+        wordPairDemo = new Control(); // !!!!! REPLACE HERE !!!!!
         assertTrue(wordPairDemo.size() == 0);
         wordPairDemo.add("hest", "horse");      //We trust the add() method here!
         wordPairDemo.add("hus", "house");
