@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 cake,kage
+=======
+kage,cake
+>>>>>>> de462063ce1f7114a42c67f229cf96542e7f8012
 bus,bus
 hest,horse
 bil,car

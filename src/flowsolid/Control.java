@@ -13,7 +13,6 @@ import java.util.Scanner;
  */
 public class Control implements WordPairControlInterface{
     private HashMap<String, String> wordPairList = new HashMap<>();
-    private ArrayList<String> unAnsweredQuestionList = new ArrayList<>();
     private Random generator = new Random();
 /**
      * Pre: Post: A new word pair is added to the existing collection of word
@@ -21,7 +20,6 @@ public class Control implements WordPairControlInterface{
      */
     void add(String question, String answer){
         wordPairList.put(question, answer);
-        unAnsweredQuestionList.add(question);
     }
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
@@ -34,8 +32,8 @@ public class Control implements WordPairControlInterface{
      * randomly selected from the collection of word pairs.
      */
     String getRandomQuestion(){
-        if(unAnsweredQuestionList.isEmpty()) return null;
-        return unAnsweredQuestionList.get(generator.nextInt(unAnsweredQuestionList.size()));
+        Object[] questions = wordPairList.keySet().toArray();
+        return (String) questions[generator.nextInt(questions.length)];
     }
 
     /**
@@ -43,10 +41,7 @@ public class Control implements WordPairControlInterface{
      * collection, otherwise false.
      */
     boolean checkGuess(String question, String quess){
-        if(quess.equals(wordPairList.get(question))){
-            unAnsweredQuestionList.remove(question);
-            return true;
-        }
+        if(quess.equals(wordPairList.get(question))) return true;
         return false;
     }
 

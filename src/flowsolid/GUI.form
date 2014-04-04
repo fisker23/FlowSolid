@@ -34,15 +34,15 @@
                       <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jLabelAnswer" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabelQuestion" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               <Component id="jTextFieldQuestion" min="-2" pref="111" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabelQuestion" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jLabelAnswer" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jButtonNew" min="-2" pref="78" max="-2" attributes="0"/>
                                   <Component id="jTextFieldAnswer" min="-2" pref="111" max="-2" attributes="0"/>
@@ -75,13 +75,13 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jTextFieldQuestion" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonNext" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="jLabelAnswer" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabelQuestion" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextFieldAnswer" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabelQuestion" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabelAnswer" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jButtonGuess" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
