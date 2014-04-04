@@ -6,6 +6,7 @@
 
 package flowsolid;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,7 +17,8 @@ import javax.swing.JOptionPane;
 public class GUI extends javax.swing.JFrame {
 
     private Control con;
-    private final int startSize; //Antal af ordpar ved starten
+    private int startSize; //Antal af ordpar ved starten
+    private ArrayList<String> AnsweredQuestionList = new ArrayList<>();
     /**
      * Creates new form GUI
      */
@@ -114,14 +116,14 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(jLabelFeedback, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(134, 134, 134))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabelAnswer)
-                                .addGap(18, 18, 18)
+                                .addComponent(jLabelQuestion)
+                                .addGap(11, 11, 11)
                                 .addComponent(jTextFieldQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabelQuestion)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabelAnswer)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jButtonNew, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -143,12 +145,12 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextFieldQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelAnswer))
+                    .addComponent(jLabelQuestion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jTextFieldAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabelQuestion))
+                        .addComponent(jLabelAnswer))
                     .addComponent(jButtonGuess, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,12 +166,17 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         // TODO add your handling code here:
-        if(con.getRandomQuestion() == null){
-            jLabelFeedback.setText("Congratz! You have answered all questions!");
-            jTextFieldQuestion.setText("");
+        if(AnsweredQuestionList.size() != startSize){
+        String question = con.getRandomQuestion();
+            if (AnsweredQuestionList.contains(question)){
+                jButtonNextActionPerformed(evt);
+            }
+            else jTextFieldQuestion.setText(question);
         }
         else{
-        jTextFieldQuestion.setText(con.getRandomQuestion());
+        jLabelFeedback.setText("Congratz! You have answered all questions!");
+        jTextFieldQuestion.setText("");
+        
         }
         jTextFieldAnswer.setText("");
         
@@ -179,6 +186,7 @@ public class GUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(
         con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText())){
+            AnsweredQuestionList.add(jTextFieldQuestion.getText());
             jLabelFeedback.setText("Korrekt");
         }
         else{
@@ -209,6 +217,7 @@ public class GUI extends javax.swing.JFrame {
             else{
             con.add(jTextFieldQuestion.getText(), jTextFieldAnswer.getText());
             jLabelFeedback.setText("New Question Added!");
+            startSize += 1;
             }
             jButtonNew.setText("New");
             jButtonGuess.setVisible(true);
