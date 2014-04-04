@@ -18,20 +18,20 @@ public class Control implements WordPairControlInterface{
      * Pre: Post: A new word pair is added to the existing collection of word
      * pairs. This method does not save to file!
      */
-    void add(String question, String answer){
+    public void add(String question, String answer){
         wordPairList.put(question, answer);
     }
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
      */
-    int size(){
+    public int size(){
         return wordPairList.size();
     }
     /**
      * Pre: At least one word pair must be present Post: Returns a question
      * randomly selected from the collection of word pairs.
      */
-    String getRandomQuestion(){
+    public String getRandomQuestion(){
         Object[] questions = wordPairList.keySet().toArray();
         return (String) questions[generator.nextInt(questions.length)];
     }
@@ -40,7 +40,7 @@ public class Control implements WordPairControlInterface{
      * Pre: Post: Returns true if (question, quess) exists as a word pair in the
      * collection, otherwise false.
      */
-    boolean checkGuess(String question, String quess){
+    public boolean checkGuess(String question, String quess){
         if(quess.equals(wordPairList.get(question))) return true;
         return false;
     }
@@ -49,7 +49,7 @@ public class Control implements WordPairControlInterface{
      * Pre: Post: Returns the answer corresponding to the question if this
      * exists in the collection. Otherwise it returns null.
      */
-    String lookup(String question){
+    public String lookup(String question){
         return wordPairList.get(question);
     }
     
@@ -58,7 +58,7 @@ public class Control implements WordPairControlInterface{
      * collection of word pairs. Returns true if successfully done. Otherwise it
      * returns false.
      */
-    boolean load(String filename){
+    public boolean load(String filename){
         Scanner scan = null;
         try {
             scan = new Scanner(new File(filename));
@@ -79,7 +79,7 @@ public class Control implements WordPairControlInterface{
      * Pre: Post: All word pairs from the collection has been written to the
      * file "filename" Returns true if successfully done. Otherwise false.
      */
-    boolean save(String filename){
+    public boolean save(String filename){
         PrintWriter pw = null;
         try {
             pw = new PrintWriter(filename);
@@ -97,7 +97,7 @@ public class Control implements WordPairControlInterface{
     /**
      * Pre: Post: The existing collection of word pairs is cleared
      */
-    void clear(){
+    public void clear(){
         wordPairList.clear();
     }
 }

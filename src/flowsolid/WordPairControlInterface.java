@@ -1,4 +1,4 @@
-package FlowSolid;
+package flowsolid;
 
 /**
  *

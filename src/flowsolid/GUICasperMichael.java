@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package flowsolidcaspermichael;
+package flowsolid;
 
 /**
  *
@@ -18,7 +18,7 @@ public class GUICasperMichael extends javax.swing.JFrame {
     WordPairControlInterface wpci;
     public GUICasperMichael() {
         initComponents();
-        wpci = new WordPairEngine();
+        wpci = new Control();
     }
 
     /**
