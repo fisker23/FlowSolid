@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class GUI extends javax.swing.JFrame {
 
-    private WordPairControlInterface con;
+    private WordPairControlInterface con; 
     private int startSize; //Antal af ordpar ved starten
     private ArrayList<String> AnsweredQuestionList = new ArrayList<>();
     /**
@@ -221,7 +221,6 @@ public class GUI extends javax.swing.JFrame {
             }
             else{
             con.add(jTextFieldQuestion.getText(), jTextFieldAnswer.getText());
-            con.addLevel(jTextFieldQuestion.getText(), 1);
             jLabelFeedback.setText("New Question Added!");
             }
             jButtonNew.setText("New");
