@@ -18,7 +18,6 @@ public class GUI extends javax.swing.JFrame {
 
     private WordPairControlInterface con; 
     private int startSize; //Antal af ordpar ved starten
-    private ArrayList<String> AnsweredQuestionList = new ArrayList<>();
     /**
      * Creat    es new form GUI
      */
@@ -172,18 +171,7 @@ public class GUI extends javax.swing.JFrame {
     private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
         // TODO add your handling code here:
         jLabelFeedback.setText("");
-        if(AnsweredQuestionList.size() != con.size()){
-        String question = con.getRandomQuestion();
-            if (AnsweredQuestionList.contains(question)){
-                jButtonNextActionPerformed(evt);
-            }
-            else jTextFieldQuestion.setText(question);
-        }
-        else{
-        jLabelFeedback.setText("Congratz! You have answered all questions!");
-        jTextFieldQuestion.setText("");
-        
-        }
+        jTextFieldQuestion.setText(con.getRandomQuestion());
         jTextFieldAnswer.setText("");
         
     }//GEN-LAST:event_jButtonNextActionPerformed
@@ -191,14 +179,9 @@ public class GUI extends javax.swing.JFrame {
     private void jButtonGuessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuessActionPerformed
         // TODO add your handling code here:
         if(
-        con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText())){
-            AnsweredQuestionList.add(jTextFieldQuestion.getText());
+        con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText())) 
             jLabelFeedback.setText("Korrekt");
-        }
-        else{
-            jLabelFeedback.setText("False");
-        }
-        
+        else jLabelFeedback.setText("False");
     }//GEN-LAST:event_jButtonGuessActionPerformed
 
     private void jButtonLookUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLookUpActionPerformed

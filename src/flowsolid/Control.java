@@ -12,55 +12,40 @@ import java.util.Scanner;
  * @author Bobbie Apitzsch og Andreas Fisker
  */
 public class Control implements WordPairControlInterface{
-    private ArrayList<wordPair> wordPairList = new ArrayList<>();
+    private HashMap<String, String> wordPairList1 = new HashMap<>();
+    private HashMap<String, String> wordPairList2 = new HashMap<>();
+    private HashMap<String, String> wordPairList3 = new HashMap<>();
     private Random generator = new Random();
-    private int userLevel;
-    private int rightAnswerCounter; 
-    private boolean questionGuessed; //Kun for nuværende question
 
-    public Control() {
-        this.userLevel = 1;
-        rightAnswerCounter = 0;
-        questionGuessed = false;
+    public Control() {     
     }
-    
-
-    
-    /**
+  /**
      * Pre: Post: A new word pair is added to the existing collection of word
      * pairs. This method does not save to file!
      */
     
     public void add(String question, String answer){
-        wordPairList.add(new wordPair(question, answer));
+        wordPairList1.put(question, answer);
     }
-    
-    public void add(String question, String answer, int score){
-        wordPairList.add(new wordPair(question, answer, score));
-    }
-    
     /**
      * Pre: Post: Returns the number of wordpairs in the collection (not the file).
      */
     public int size(){
-        return wordPairList.size();
+        return wordPairList1.size() + wordPairList2.size() + wordPairList3.size();
     }
     /**
      * Pre: At least one word pair must be present Post: Returns a question
      * randomly selected from the collection of word pairs.
      */
     public String getRandomQuestion(){
-        ArrayList<wordPair> newList = new ArrayList<>();
-        for(wordPair wp : wordPairList){
-            if(wp.getScore() == userLevel) newList.add(wp);
-        }
-        if(newList.isEmpty() && userLevel == 5) return "No more questions";
-        if(newList.isEmpty()) {         //Hæver brugerens niv, hvis der er ikke flere spg i nuværende level.
-            userLevel++;
-            return getRandomQuestion();
-        }        
-        questionGuessed = false;
-        return newList.get(generator.nextInt(newList.size())).getQuestion();        
+        int randomnumber = generator.nextInt(100);
+        System.out.println(randomnumber);
+        Object[] questions;
+        if(randomnumber > 90 && !wordPairList3.isEmpty()) questions = wordPairList3.keySet().toArray();
+        else if(randomnumber >70 && !wordPairList2.isEmpty()) questions = wordPairList2.keySet().toArray();            
+        else if(!wordPairList1.isEmpty()) questions = wordPairList1.keySet().toArray();
+        else return getRandomQuestion();
+        return (String) questions[generator.nextInt(questions.length)];
     }
     
     /**
@@ -68,20 +53,26 @@ public class Control implements WordPairControlInterface{
      * collection, otherwise false.
      */
     public boolean checkGuess(String question, String quess){
-        for(wordPair wp : wordPairList){
-            if(wp.getQuestion().equals(question)){  //Leder efter spg i arrayList
-                if(wp.getAnswer().equals(quess)){   //Tjekker om svaret er korrekt
-                    if(++rightAnswerCounter == 5) { //Hæver brugerens niv hvis der er 5. rigtige svar.
-                        rightAnswerCounter = 0;
-                        userLevel++;
-                    }
-                    return true;
-                }
+        if(lookup(question).equals(quess)){
+            if(wordPairList1.containsKey(question)){ //Flytter spg til næste liste
+                wordPairList2.put(question, wordPairList1.get(question));
+                wordPairList1.remove(question);
             }
+            else if(wordPairList2.containsKey(question)){ //Flytter spg til næste liste
+                wordPairList3.put(question, wordPairList2.get(question));
+                wordPairList2.remove(question);
+            }
+            return true;
         }
-        if (!questionGuessed){      //Hvis der ikke er gættet på spørgsmålet
-            questionGuessed = true; 
-            rightAnswerCounter -= 2;
+        else{
+            if(wordPairList3.containsKey(question)){ //Flytter spg til forrige liste
+                wordPairList2.put(question, wordPairList3.get(question));
+                wordPairList3.remove(question);
+            }
+            if(wordPairList2.containsKey(question)){ //Flytter spg til forrige liste
+                wordPairList1.put(question, wordPairList2.get(question));
+                wordPairList2.remove(question);
+            }
         }
         return false;
     }
@@ -91,10 +82,10 @@ public class Control implements WordPairControlInterface{
      * exists in the collection. Otherwise it returns null.
      */
     public String lookup(String question){
-        for(wordPair wp : wordPairList){
-            if (wp.getQuestion().equals(question)) return wp.getAnswer();
-        }
-        return "doesnt exist";
+        if(wordPairList1.containsKey(question)) return wordPairList1.get(question);
+        else if(wordPairList2.containsKey(question)) return wordPairList2.get(question);
+        else if(wordPairList3.containsKey(question)) return wordPairList3.get(question);
+        else return "<Not in dictionary>";
     }
     
     /**
@@ -109,8 +100,7 @@ public class Control implements WordPairControlInterface{
             while (scan.hasNext()){
                 String str = scan.nextLine();
                 String[] parts = str.split(",");
-                if(parts.length == 2) add(parts[0], parts[1]);
-                else add(parts[0], parts[1], Integer.parseInt(parts[2]));
+                wordPairList1.put(parts[0], parts[1]);
             }
         scan.close();
         return true;
@@ -132,9 +122,15 @@ public class Control implements WordPairControlInterface{
             return false;
         }
         
-        for(wordPair wp : wordPairList){
-            pw.println(wp.getQuestion() + "," + wp.getAnswer()+ "," + wp.getScore());
-        }        
+        for(Object o : wordPairList1.keySet()){
+            pw.println(o + "," + wordPairList1.get(o));
+        }
+        for(Object o : wordPairList2.keySet()){
+            pw.println(o + "," + wordPairList2.get(o));
+        }
+        for(Object o : wordPairList3.keySet()){
+            pw.println(o + "," + wordPairList3.get(o));
+        }
         pw.close();
         return true;
     
@@ -143,6 +139,8 @@ public class Control implements WordPairControlInterface{
      * Pre: Post: The existing collection of word pairs is cleared
      */
     public void clear(){
-        wordPairList.clear();
+        wordPairList1.clear();
+        wordPairList2.clear();
+        wordPairList3.clear();
     }
 }
