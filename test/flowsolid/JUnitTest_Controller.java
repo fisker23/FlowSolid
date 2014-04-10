@@ -67,6 +67,7 @@ public class JUnitTest_Controller
      */
     public void testLoad()
     {
+        System.out.println(fileName);
         assertTrue(wordPairDemo.save(fileName));
         wordPairDemo.clear();
         assertTrue(wordPairDemo.load(fileName));

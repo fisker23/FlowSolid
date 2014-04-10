@@ -39,7 +39,6 @@ public class Control implements WordPairControlInterface{
      */
     public String getRandomQuestion(){
         int randomnumber = generator.nextInt(100);
-        System.out.println(randomnumber);
         Object[] questions;
         if(randomnumber > 90 && !wordPairList3.isEmpty()) questions = wordPairList3.keySet().toArray();
         else if(randomnumber >70 && !wordPairList2.isEmpty()) questions = wordPairList2.keySet().toArray();            
