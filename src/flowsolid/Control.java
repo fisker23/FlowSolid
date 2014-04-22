@@ -14,7 +14,8 @@ import java.util.Scanner;
 public class Control implements WordPairControlInterface{
     private Engine engine;
 
-    public Control() {     
+    public Control() {
+        engine = new Engine();
     }
   /**
      * Pre: Post: A new word pair is added to the existing collection of word
