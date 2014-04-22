@@ -1,7 +1,8 @@
-bil,car
-lastbil,truck
-hest,horse
+computer,computer
 kage,cake
 bus,bus
-hus,house
+hest,horse
 door,dør
+bil,car
+lastbil,truck
+hus,house

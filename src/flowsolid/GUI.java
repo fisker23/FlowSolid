@@ -178,9 +178,13 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonGuessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuessActionPerformed
         // TODO add your handling code here:
-        if(
-        con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText())) 
-            jLabelFeedback.setText("Korrekt");
+        
+        if(con.lookup(jTextFieldQuestion.getText()).equals("<Not in dictionary>")){
+            jLabelFeedback.setText("");
+            jButtonLookUpActionPerformed(evt);
+        }
+        else if(con.checkGuess(jTextFieldQuestion.getText(), jTextFieldAnswer.getText())) 
+            jLabelFeedback.setText("Korrekt");                
         else jLabelFeedback.setText("False");
     }//GEN-LAST:event_jButtonGuessActionPerformed
 
