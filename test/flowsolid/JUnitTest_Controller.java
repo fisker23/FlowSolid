@@ -1,5 +1,7 @@
 package flowsolid;
 
+import Entity.WordPairControlInterface;
+import Control.Control;
 import java.util.UUID;
 import org.junit.After;
 import org.junit.Before;

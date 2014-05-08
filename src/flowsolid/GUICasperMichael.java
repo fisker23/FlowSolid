@@ -6,6 +6,9 @@
 
 package flowsolid;
 
+import Entity.WordPairControlInterface;
+import Control.Control;
+
 /**
  *
  * @author Michael
