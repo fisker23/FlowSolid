@@ -6,7 +6,7 @@
 
 package flowsolid;
 
-import Entity.WordPairControlInterface;
+import Control.WordPairControlInterface;
 import Control.Control;
 
 /**

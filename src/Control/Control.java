@@ -1,7 +1,6 @@
 package Control;
 
 import Entity.Engine;
-import Entity.WordPairControlInterface;
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;

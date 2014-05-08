@@ -7,7 +7,7 @@
 package Boundary;
 
 import Control.Control;
-import Entity.WordPairControlInterface;
+import Control.WordPairControlInterface;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
