@@ -77,13 +77,13 @@ public class Engine{
             }
         }
         else{
-            if(wordPairList3.containsKey(question)){ //Flytter spg til forrige liste
-                wordPairList2.put(question, wordPairList3.get(question));
-                wordPairList3.remove(question);
-            }
             if(wordPairList2.containsKey(question)){ //Flytter spg til forrige liste
                 wordPairList1.put(question, wordPairList2.get(question));
                 wordPairList2.remove(question);
+            }
+            else if(wordPairList3.containsKey(question)){ //Flytter spg til forrige liste
+                wordPairList2.put(question, wordPairList3.get(question));
+                wordPairList3.remove(question);
             }
         }
     }
