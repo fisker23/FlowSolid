@@ -61,7 +61,12 @@ public class Engine{
      * collection, otherwise false.
      */
     public boolean checkGuess(String question, String quess){
-        if(lookup(question).equals(quess)){
+        moveWord(question, lookup(question).equals(quess));
+        return lookup(question).equals(quess);
+    }
+
+    public void moveWord(String question, boolean correctGuess){
+        if(correctGuess){
             if(wordPairList1.containsKey(question)){ //Flytter spg til næste liste
                 wordPairList2.put(question, wordPairList1.get(question));
                 wordPairList1.remove(question);
@@ -70,7 +75,6 @@ public class Engine{
                 wordPairList3.put(question, wordPairList2.get(question));
                 wordPairList2.remove(question);
             }
-            return true;
         }
         else{
             if(wordPairList3.containsKey(question)){ //Flytter spg til forrige liste
@@ -82,9 +86,7 @@ public class Engine{
                 wordPairList2.remove(question);
             }
         }
-        return false;
     }
-
     /**
      * Pre: Post: Returns the answer corresponding to the question if this
      * exists in the collection. Otherwise it returns null.
